@@ -7,13 +7,11 @@ const express = require('express'),
 
 
 //set route
-// app.get('/', function(req,res) {
-// 	res.send('Hello World');
-// });
+app.use(require('./app/route'));
 
-app.get('/', (req,res) => {
-	res.send('Hello there');
-});
+// app.get('/', (req,res) => {
+// 	res.send('Hello there');
+// });
 
 //start our server
 app.listen(port, () => {
