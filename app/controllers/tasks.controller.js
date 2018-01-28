@@ -8,12 +8,16 @@ module.exports = {
 			{task: 'AIV', slug: 'aiv', detail: 'Matrix analysis'},
 			{task: 'Sheet Management', slug: 'sheet_management', detail: 'Detail specs'},
 
-		]
-
+		];
 
 		// return a view with dummy data
-
 		res.render('pages/tasks', {tasks: tasks});
+	},
+
+	showSingleTask: (req, res) => {
+		const task = {task: 'Tableau', slug: 'tableau', detail: 'create visualization'};
+		
+		res.render('pages/single', {task: task});
 	}
 
 };

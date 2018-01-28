@@ -7,7 +7,10 @@ const express = require('express'),
 module.exports = router;
 
 //define routes
+// show main route
 router.get('/', mainController.showHome );
 
 // show tasks
 router.get('/tasks', taskController.showTasks);
+
+router.get('/task/:slug', taskController.showSingleTask);
