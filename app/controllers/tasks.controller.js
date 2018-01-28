@@ -1,21 +1,19 @@
 module.exports = {
 
-	// show all events
+	// show all tasks
 	showTasks: (req, res) => {
 		// create dummy data
 		const tasks = [
-					{name: 'Tableau', 
-					slug: 'tableau',
-					detail: 'Create base visualization'},
-					{name: 'AIV', 
-					slug: 'aiv',
-					detail: 'Arrange meeting with Toba'},
-					{name: 'Sheet Management', 
-					slug: 'sheetmanagement',
-					detail: 'Detail specifications'},
-				];
-	// return view with all the data
-	res.render('pages/tasks', {tasks: tasks});
+			{task: 'Tableau', slug: 'tableau', detail: 'create visualization'},
+			{task: 'AIV', slug: 'aiv', detail: 'Matrix analysis'},
+			{task: 'Sheet Management', slug: 'sheet_management', detail: 'Detail specs'},
 
+		]
+
+
+		// return a view with dummy data
+
+		res.render('pages/tasks', {tasks: tasks});
 	}
+
 };
