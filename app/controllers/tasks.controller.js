@@ -1,44 +1,65 @@
 const Tasks = require('../models/tasks');
 
 module.exports = {
-	// show all tasks
-	showTasks: (req, res) => {
-		// get event
-
-
-		// return a view with dummy data
-		res.render('pages/tasks', {tasks: tasks});
-	},
-
-	showSingleTask: (req, res) => {
-		const task = {name: 'Tableau', slug: 'tableau', detail: 'create visualization'};
-		
-		res.render('pages/singleTask', {task: task});
-	},
-
-	// to seed our database
-	seedTasks: (req, res) => {
-	
-
-		// create some tasks
-		const tasks = [
-			{name: 'Tableau', detail: 'To ceate  base visualizations'},
-			{name: 'AIV',  detail: 'Create matrix analysis'},
-			{name: 'Sheet Management',  detail: 'List down detail workflows'},
-			{name: 'Cobot',  detail: 'Get cost estimation'},
-
-		];
-		// use the task models to save
-		Event.remove({}, () => {  
-			for (task of tasks) {
-				var newTask = new Tasks(task);
-				newTask.save()
-			}
-		});
-		
-
-		// seeded
-		res.send("database seeded");
-	}
+	showTasks: showTasks, 
+	showSingleTask: showSingleTask,
+	seedTasks: seedTasks
 
 };
+
+// show all tasks ======================================
+function showTasks(req, res)  {
+	// get event
+	Tasks.find({},  (err, tasks) => {
+		if (err) {
+			res.status(404);
+			res.send('Events not found');
+		}
+
+		// return a view with data
+		res.render('pages/tasks', {tasks: tasks});
+	});
+
+	
+}
+// =====================================================
+
+function showSingleTask(req, res) {
+	// const task = {name: 'Tableau', slug: 'tableau', detail: 'create visualization'};
+	Tasks.findOne({slug: req.params.slug}, (err, task) => {
+		if (err) {
+			res.status(404);
+			res.send('Events not found');
+		}
+
+		// return a view with data
+		res.render('pages/singleTask', {task: task});
+	});
+}
+// =====================================================
+
+
+// to seed our database =================================
+function seedTasks(req, res) {
+	// create some tasks
+	const tasks = [
+		{name: 'Tableau', detail: 'To ceate  base visualizations'},
+		{name: 'AIV',  detail: 'Create matrix analysis'},
+		{name: 'Sheet Management',  detail: 'List down detail workflows'},
+		{name: 'Cobot',  detail: 'Get cost estimation'},
+	];
+
+	// Remove any existing data
+	// use the model to save a new data
+	Tasks.remove({}, () => {  
+		for (task of tasks) {
+			var newTask = new Tasks(task);
+			newTask.save()
+		}
+	});
+	
+
+	// Show a success message
+	res.send("database seeded");
+}
+// =====================================================

@@ -16,5 +16,5 @@ router.get('/tasks', taskController.showTasks);
 // seeding a database
 router.get('/tasks/seed', taskController.seedTasks);
 
-
+// show a single task
 router.get('/task/:slug', taskController.showSingleTask);
