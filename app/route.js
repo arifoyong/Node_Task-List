@@ -13,4 +13,8 @@ router.get('/', mainController.showHome );
 // show tasks
 router.get('/tasks', taskController.showTasks);
 
+// seeding a database
+router.get('/tasks/seed', taskController.seedTasks);
+
+
 router.get('/task/:slug', taskController.showSingleTask);
