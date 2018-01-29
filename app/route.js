@@ -16,5 +16,16 @@ router.get('/tasks', taskController.showTasks);
 // seeding a database
 router.get('/tasks/seed', taskController.seedTasks);
 
+
+// create new task
+router.get('/tasks/create', taskController.showCreate);
+router.post('/tasks/create', taskController.processCreate);
+
+
+// edit task
+// delete task
+
+
+
 // show a single task
 router.get('/task/:slug', taskController.showSingleTask);

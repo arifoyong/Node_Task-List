@@ -2,11 +2,12 @@
 require('dotenv').config();
 
 //grab dependencies
-const express = require('express'),
-				app = express(),
-				port = process.env.PORT || 8080, 
-				expressLayouts = require('express-ejs-layouts'), 
-				mongoose = require('mongoose');
+const 	express = 			require('express'),
+		app = 				express(),
+		port = 				process.env.PORT || 8080, 
+		expressLayouts = 	require('express-ejs-layouts'), 
+		mongoose = 			require('mongoose'),
+		bodyParser = 		require('body-parser');
 
 //configure application	
 //tell express where to look for static assets
@@ -20,6 +21,9 @@ app.use(expressLayouts);
 // connect to our database
 mongoose.connect(process.env.DB_URI);
 // mongoose.connect('mongodb://arifoyong:arifoyong@ds117878.mlab.com:17878/tasklist');
+
+// use body parser to grab infor from a form
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //set route

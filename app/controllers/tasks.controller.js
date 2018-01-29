@@ -3,8 +3,9 @@ const Tasks = require('../models/tasks');
 module.exports = {
 	showTasks: showTasks, 
 	showSingleTask: showSingleTask,
-	seedTasks: seedTasks
-
+	seedTasks: seedTasks,
+	showCreate: showCreate,
+	processCreate: processCreate
 };
 
 // show all tasks ======================================
@@ -63,3 +64,33 @@ function seedTasks(req, res) {
 	res.send("database seeded");
 }
 // =====================================================
+
+
+// show the create form
+function showCreate(req, res) {
+
+	res.render('pages/createTask');
+}
+
+// proces create form
+function processCreate(req, res) {
+	// create new task
+	const NewTask = new Tasks(
+						{
+							name: req.body.task, 
+							detail: req.body.detail
+						}
+						);
+
+	// save the task
+	NewTask.save((err) => {
+		// if (err) throw err;
+		if (err)
+			throw err;
+
+		
+		// redirect to the newly created task
+		res.redirect(`/task/${NewTask.slug}`);
+	});
+	
+}
