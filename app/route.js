@@ -18,11 +18,14 @@ router.get('/tasks/seed', taskController.seedTasks);
 
 
 // create new task
-router.get('/tasks/create', taskController.showCreate);
-router.post('/tasks/create', taskController.processCreate);
+router.get('/task/create', taskController.showCreate);
+router.post('/task/create', taskController.processCreate);
 
 
 // edit task
+router.get('/task/:slug/edit', taskController.showEdit);
+router.post('/task/:slug', taskController.processEdit);
+
 // delete task
 
 

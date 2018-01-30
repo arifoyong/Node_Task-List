@@ -5,7 +5,9 @@ module.exports = {
 	showSingleTask: showSingleTask,
 	seedTasks: seedTasks,
 	showCreate: showCreate,
-	processCreate: processCreate
+	processCreate: processCreate,
+	showEdit: showEdit, 
+	processEdit: processEdit		
 };
 
 // show all tasks ======================================
@@ -112,5 +114,51 @@ function processCreate(req, res) {
 		// redirect to the newly created task
 		res.redirect(`/task/${NewTask.slug}`);
 	});
+	
+}
+
+// show the Edit form
+function showEdit(req, res) {
+	Tasks.findOne({slug: req.params.slug}, (err, task) => {
+		res.render('pages/edit', {
+									task: task,
+									errors: req.flash('errors')
+								});
+	});
+}
+
+// process the edit form
+function processEdit(req, res) {
+	// validate information
+	req.checkBody('task', 'Task name is required').notEmpty();
+	req.checkBody('detail', 'Detail is required').notEmpty();
+
+	// if there is any error, redirect & show error to flash data
+	const errors =  req.validationErrors();
+	if (errors) {
+		req.flash('errors', errors.map(err => err.msg));
+		return res.redirect(`/task/${req.params.slug}/edit`);
+	}
+
+	// find current event
+	Tasks.findOne({slug: req.params.slug}, (err, task) => {
+		// update the event
+
+		task.name 	= req.body.task;
+		task.detail = req.body.detail;
+
+		task.save((err) => {
+			 if (err)
+			 	throw err;
+
+			// flash success message
+			// redirect to /tasks
+			req.flash('success', 'Successfully updated task');
+			res.redirect('/tasks')
+		});
+
+			
+	} );
+
 	
 }
