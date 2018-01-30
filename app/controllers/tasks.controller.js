@@ -34,7 +34,10 @@ function showSingleTask(req, res) {
 		}
 
 		// return a view with data
-		res.render('pages/singleTask', {task: task});
+		res.render('pages/singleTask', {
+			task: task,
+			success: req.flash('success')
+			});
 	});
 }
 // =====================================================
@@ -68,12 +71,24 @@ function seedTasks(req, res) {
 
 // show the create form
 function showCreate(req, res) {
-
-	res.render('pages/createTask');
+	res.render('pages/createTask', {
+					errors: req.flash('errors')
+				});
 }
 
 // proces create form
 function processCreate(req, res) {
+	// validate information
+	req.checkBody('task', 'Task name is required').notEmpty();
+	req.checkBody('detail', 'Detail is required').notEmpty();
+
+	// if there is any error, redirect & show error to flash data
+	const errors =  req.validationErrors();
+	if (errors) {
+		req.flash('errors', errors.map(err => err.msg));
+		return res.redirect('/tasks/create');
+	}
+
 	// create new task
 	const NewTask = new Tasks(
 						{
@@ -85,10 +100,15 @@ function processCreate(req, res) {
 	// save the task
 	NewTask.save((err) => {
 		// if (err) throw err;
-		if (err)
-			throw err;
+		if (err) {
+			// throw err;
+			req.flash('errors', err.message);
+			return res.redirect('/tasks/create');
+		}
 
-		
+		// set a successful flash message
+		req.flash('success', 'Successfully added task');
+
 		// redirect to the newly created task
 		res.redirect(`/task/${NewTask.slug}`);
 	});
