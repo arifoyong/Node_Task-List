@@ -27,7 +27,7 @@ router.get('/task/:slug/edit', taskController.showEdit);
 router.post('/task/:slug', taskController.processEdit);
 
 // delete task
-
+router.get('/task/:slug/delete', taskController.processDelete);
 
 
 // show a single task

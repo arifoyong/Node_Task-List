@@ -7,7 +7,8 @@ module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showEdit: showEdit, 
-	processEdit: processEdit		
+	processEdit: processEdit,
+	processDelete: processDelete		
 };
 
 // show all tasks ======================================
@@ -20,7 +21,10 @@ function showTasks(req, res)  {
 		}
 
 		// return a view with data
-		res.render('pages/tasks', {tasks: tasks});
+		res.render('pages/tasks', {
+									tasks: tasks,
+									success: req.flash('success')
+								});
 	});
 
 	
@@ -159,6 +163,16 @@ function processEdit(req, res) {
 
 			
 	} );
+}
 
-	
+// delete a task
+function processDelete(req, res) {
+	// find the intended event
+	Tasks.remove({slug: req.params.slug}, (err) => {
+		// set a flash data
+		req.flash('success', 'Event was deleted');
+
+		// redirect back to tasks page
+		res.redirect('/tasks');
+	} );
 }

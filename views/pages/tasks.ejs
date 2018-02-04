@@ -7,6 +7,12 @@
 	</a>
 </div>
 
+<% if (success.length > 0) { %>
+	<div class="alert alert-success">
+		<%= success %>
+	</div>
+<% } %>
+
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
@@ -28,11 +34,14 @@
 					<a href="/task/<%= task.slug%>/edit" class="btn btn-sm btn-primary">
 						Edit
 					</a>
-					<a href="/task/delete" class="btn btn-sm btn-danger">
+					<a href="/task/<%= task.slug%>/delete" class="btn btn-sm btn-danger data">
 						Delete
 					</a>
+				
+				
 				</td>
 			</tr>
 		<% } %>
 	</tbody>
 </table>
+
