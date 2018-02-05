@@ -15,7 +15,7 @@
 			</div>
 		<% } %>
 
-		<form action="/task/<%= task.slug %>" method="POST">
+		<form action="../task/<%= task.slug %>" method="POST">
 			<div class="form-group">
 				<label for="task">Task</label>
 				<input type="text" name="task" class="form-control" value="<%= task.name %>">
