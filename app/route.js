@@ -8,27 +8,27 @@ module.exports = router;
 
 //define routes
 // show main route
-router.get('/', mainController.showHome );
+router.get('./', mainController.showHome );
 
 // show tasks
-router.get('/tasks', taskController.showTasks);
+router.get('./tasks', taskController.showTasks);
 
 // seeding a database
-router.get('/tasks/seed', taskController.seedTasks);
+router.get('./tasks/seed', taskController.seedTasks);
 
 
 // create new task
-router.get('/task/create', taskController.showCreate);
-router.post('/task/create', taskController.processCreate);
+router.get('./task/create', taskController.showCreate);
+router.post('./task/create', taskController.processCreate);
 
 
 // edit task
-router.get('/task/:slug/edit', taskController.showEdit);
-router.post('/task/:slug', taskController.processEdit);
+router.get('./task/:slug/edit', taskController.showEdit);
+router.post('./task/:slug', taskController.processEdit);
 
 // delete task
-router.get('/task/:slug/delete', taskController.processDelete);
+router.get('./task/:slug/delete', taskController.processDelete);
 
 
 // show a single task
-router.get('/task/:slug', taskController.showSingleTask);
+router.get('./task/:slug', taskController.showSingleTask);
