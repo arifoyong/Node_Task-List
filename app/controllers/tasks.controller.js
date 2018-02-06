@@ -50,28 +50,28 @@ function showSingleTask(req, res) {
 
 
 // to seed our database =================================
-function seedTasks(req, res) {
-	// create some tasks
-	const tasks = [
-		{name: 'Tableau', detail: 'To ceate  base visualizations'},
-		{name: 'AIV',  detail: 'Create matrix analysis'},
-		{name: 'Sheet Management',  detail: 'List down detail workflows'},
-		{name: 'Cobot',  detail: 'Get cost estimation'},
-	];
+ function seedTasks(req, res) {
+// 	// create some tasks
+// 	const tasks = [
+// 		{name: 'Tableau', detail: 'To ceate  base visualizations'},
+// 		{name: 'AIV',  detail: 'Create matrix analysis'},
+// 		{name: 'Sheet Management',  detail: 'List down detail workflows'},
+// 		{name: 'Cobot',  detail: 'Get cost estimation'},
+// 	];
 
-	// Remove any existing data
-	// use the model to save a new data
-	Tasks.remove({}, () => {  
-		for (task of tasks) {
-			var newTask = new Tasks(task);
-			newTask.save()
-		}
-	});
+// 	// Remove any existing data
+// 	// use the model to save a new data
+// 	Tasks.remove({}, () => {  
+// 		for (task of tasks) {
+// 			var newTask = new Tasks(task);
+// 			newTask.save()
+// 		}
+// 	});
 	
 
-	// Show a success message
-	res.send("database seeded");
-}
+// 	// Show a success message
+// 	res.send("database seeded");
+ }
 // =====================================================
 
 
@@ -109,7 +109,7 @@ function processCreate(req, res) {
 		if (err) {
 			// throw err;
 			req.flash('errors', err.message);
-			return res.redirect('/tasks/create');
+			return res.redirect('/task/create');
 		}
 
 		// set a successful flash message

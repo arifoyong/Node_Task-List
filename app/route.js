@@ -13,18 +13,18 @@ router.get('/', mainController.showHome );
 // show tasks
 router.get('/tasks', taskController.showTasks);
 
-// seeding a database
+// seeding a databaser
 router.get('/tasks/seed', taskController.seedTasks);
 
 
 // create new task
 router.get('/task/create', taskController.showCreate);
-router.post('./task/create', taskController.processCreate);
+router.post('/task/create', taskController.processCreate);
 
 
 // edit task
 router.get('/task/:slug/edit', taskController.showEdit);
-router.post('./task/:slug', taskController.processEdit);
+router.post('/task/:slug', taskController.processEdit);
 
 // delete task
 router.get('/task/:slug/delete', taskController.processDelete);
